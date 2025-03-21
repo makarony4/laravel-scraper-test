@@ -1,0 +1,39 @@
+services:
+  web:
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./public:/var/www/public
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+
+  php:
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./:/var/www/
+    environment:
+      PHP_IDE_CONFIG: "serverName=crawler"
+
+  db:
+    image: mariadb:10.11-jammy
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=crawler
+      - MYSQL_USER=admin_root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=!ChangeMe!
+    volumes:
+      - ./docker/db/data:/var/lib/mysql/:rw
+    ports:
+      - "3307:3306"
+
+
+
+volumes:
+  ###> doctrine/doctrine-bundle ###
+  database_data:
+###< doctrine/doctrine-bundle ###
