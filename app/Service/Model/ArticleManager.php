@@ -21,8 +21,8 @@ class ArticleManager
             $article->save();
             return $article;
         } catch (\Throwable $e) {
-            Log::error('Error while creating article with title: ' . $articleDTO->title, [$e->getMessage()]);
-            return new \Exception('Error while creating article with title: ' . $articleDTO->title, $e->getCode());
+            Log::error('Error while creating article.', [$e->getMessage()]);
+            throw new \Exception('Error while creating article. ' . $e->getMessage(),  $e->getCode());
         }
     }
 

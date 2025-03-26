@@ -49,11 +49,11 @@ class CrawlManager implements CrawlerInterface
                 return $response;
             } else {
                 Log::error("Error status code from " . self::MAIN_URL, [$response->getStatusCode()]);
-                return new \Exception("Error on sending request to " . self::MAIN_URL, $response->getStatusCode());
+                throw new \Exception("Error on sending request to " . self::MAIN_URL, $response->getStatusCode());
             }
         } catch (\Throwable $e) {
             Log::error("Error while send request for getting articles", [$e->getMessage()]);
-            return new \Exception("Error while send request for getting articles", $e->getCode());
+            throw new \Exception("Error while send request for getting articles", $e->getCode());
         }
     }
 
@@ -97,7 +97,7 @@ class CrawlManager implements CrawlerInterface
         }catch (\Throwable $exception)
         {
             Log::error($exception->getMessage());
-            return new \Exception("Error while getting articles" . $exception->getMessage());
+            throw new \Exception("Error while getting articles" . $exception->getMessage());
         }
     }
 
