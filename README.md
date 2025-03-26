@@ -10,6 +10,21 @@ After build go to php container with command `docker compose exec php /bin/bash`
 <br>
 Then run `composer install`
 
+* Database .env config
+
+DB_CONNECTION=mariadb
+<br>
+DB_HOST=db
+<br>
+DB_PORT=3306
+<br>
+DB_DATABASE=crawler
+<br>
+DB_USERNAME=root
+<br>
+DB_PASSWORD=root
+<br>
+
 * Start crawling
 
 Now project should work.On index page should be a table with articles (it'll be blank, bcs db is empty).
