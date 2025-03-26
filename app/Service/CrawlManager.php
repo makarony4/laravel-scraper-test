@@ -136,6 +136,19 @@ class CrawlManager implements CrawlerInterface
     {
         try {
             $this->getTokenAndCookiesRequest();
+            $articles = Article::all();
+
+
+            if($articles->isEmpty())
+            {
+                try {
+                    $this->getArticles();
+                    return ["info" => "Success parse articles."];
+                }catch (\Throwable $exception)
+                {
+                    return ['error' => "Error while crawling data. " . $exception->getMessage()];
+                }
+            }
 
             $article = Article::query()->orderBy("publication_date", "desc")->first();
             $html = $this->getArticlesRequest()->getBody()->getContents();
