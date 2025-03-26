@@ -9,6 +9,8 @@ After build go to php container with command `docker compose exec php /bin/bash`
 <br>
 <br>
 Then run `composer install`
+<br>
+Run command from php container `php artisan migrate` .
 
 * Database .env config
 
@@ -28,8 +30,7 @@ DB_PASSWORD=root
 * Start crawling
 
 Now project should work.On index page should be a table with articles (it'll be blank, bcs db is empty).
-<br>
-Run command from php container `php artisan migrate` . 
+
 <br>
 
 Command for start crawling `php artisan app:update-articles`
